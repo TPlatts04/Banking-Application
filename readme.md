@@ -1,5 +1,5 @@
 <h1>Banking Application (CLI)</h1>
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 <h2>Project Description</h2>
 This is my biggest project yet. It is a CLI (terminal) based Banking Application. This really tested my knowledge about everything i have learnt in Python, minus the few things like lambda etc. Nonetheless, this project is something i really am proud of. It had taken me about 3 hours of consistent work, spread out across 8 hours with breaks. The banking application you see here allows you to create 3 types of accounts:
 <ol>
@@ -14,7 +14,7 @@ This is my biggest project yet. It is a CLI (terminal) based Banking Application
     </li>
 </ol>
 You are able to deposit, withdraw and transfer beetween accounts. I utilise CSV and File I/O in this project to store the accounts' data so when the user exits the program, the accounts are not lost and they can be used again and again.
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 <h2>How to use the program</h2>
 Like all my programs these are simple to use:
 <ol>
@@ -28,7 +28,7 @@ Like all my programs these are simple to use:
         Run the code from <code>banking_input.py</code> as the code from <code>banking_app.py</code> just sets the baselines for what each account should do with different methods.
     </li>
 </ol>
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 <h2>Licensing</h2>
 0. Definitions.
 “This License” refers to version 3 of the GNU General Public License.
