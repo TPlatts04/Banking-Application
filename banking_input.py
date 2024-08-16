@@ -1,6 +1,7 @@
 from banking_app import *
 import os
 import csv
+import sys
 
 # Testing
 # Tom = BankAccount("Tom", 500)
@@ -26,8 +27,9 @@ accounts = []
 tempList = []
 
 def main():
+    accountsLength = len(accounts)
     print("\nWelcome to Tom's Banking Application!")
-    options = int(input("Would you like to:\n(1) Create an account\n(2) Deposit to the account\n(3) Withdraw from the account\n(4) Transfer to another account\nEnter option number here: "))
+    options = int(input("Would you like to:\n(1) Create an account\n(2) Deposit to the account\n(3) Withdraw from the account\n(4) Transfer to another account\n(5) To exit program.\nEnter option number here: "))
     match options:
         case 1:
             createAccount()
@@ -37,6 +39,8 @@ def main():
             withdrawAccount()
         case 4:
             transferAccount()
+        case 5:
+            sys.exit()
         case "_":
             print("Invalid option, please try again...")
             main()
@@ -49,6 +53,7 @@ def appendCSV():
             if row["account_name"] != "account_name":
                 accountHolder = BankAccount(row["account_name"], float(row["balance"]))
                 accounts.append(accountHolder)
+                os.system('cls')
             else:
                 loopCounter += 1
                 if loopCounter == len(row):
@@ -65,17 +70,17 @@ def assignFieldnames():
 
 def createAccount():
     global newAccount
-    accountName = input("\nWhat is the to be Account Holder's name? ")
+    accountName = input("\nWhat is the to be Account Holder's name? ").capitalize()
     accountInitialDeposit = int(input("\nHow much would you like to initally deposit into the account? £"))
     accountHolder = BankAccount(accountName, accountInitialDeposit)
     accounts.append(accountHolder)
     with open(FILENAME, "a") as file:
-        file.writelines(f"{accountName},{accountInitialDeposit}")
+        file.writelines(f"{accountName},{accountInitialDeposit}\n")
     main()
 
 def depositAccount():
     loopCounter = 0
-    depositLocation = input("\nWhat account would you like to send this deposit to?\n(Enter name of account holder): ")
+    depositLocation = input("\nWhat account would you like to send this deposit to?\n(Enter name of account holder): ").capitalize()
     for names in accounts:
         if names.name == depositLocation:
             depositAmount = float(input(f"\nHow much would you like to deposit in {depositLocation}'s account? £"))
@@ -100,7 +105,7 @@ def depositAccount():
 
 def withdrawAccount():
     loopCounter = 0
-    withdrawLocation = input("\nWhich account would you like to withdraw from?\n(Enter name of account holder): ")
+    withdrawLocation = input("\nWhich account would you like to withdraw from?\n(Enter name of account holder): ").capitalize()
     for names in accounts:
         if names.name == withdrawLocation:
             withdrawAmount = float(input("\bHow much would you like to withdraw? £"))
@@ -122,8 +127,8 @@ def withdrawAccount():
                 depositAccount()
 
 def transferAccount():
-    transferStart = input("\nWhich account would you like to transfer from?\n(Enter name of account holder): ")
-    transferEnd = input("\nWhich account would you like to transfer to?\n(Enter name of account holder): ")
+    transferStart = input("\nWhich account would you like to transfer from?\n(Enter name of account holder): ").capitalize()
+    transferEnd = input("\nWhich account would you like to transfer to?\n(Enter name of account holder): ").capitalize()
     loopCounter = 0
     for nameStart in accounts:
         if nameStart.name == transferStart:
@@ -139,8 +144,8 @@ def transferAccount():
                                 indexOfLine = x
                         lines[indexOfLine] = f"{nameStart.name},{nameStart.balance}\n"
                         for y in range(len(lines)):
-                            if transferEnd in lines[x].strip().replace(",", " "):
-                                indexOfLine = x
+                            if transferEnd in lines[y].strip().replace(",", " "):
+                                indexOfLine = y
                         lines[indexOfLine] = f"{nameEnd.name},{nameEnd.balance}\n"
                     with open(FILENAME, "w") as file:
                         file.writelines(lines)
