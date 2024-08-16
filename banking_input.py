@@ -27,7 +27,6 @@ accounts = []
 tempList = []
 
 def main():
-    accountsLength = len(accounts)
     print("\nWelcome to Tom's Banking Application!")
     options = int(input("Would you like to:\n(1) Create an account\n(2) Deposit to the account\n(3) Withdraw from the account\n(4) Transfer to another account\n(5) To exit program.\nEnter option number here: "))
     match options:
@@ -70,10 +69,35 @@ def assignFieldnames():
 
 def createAccount():
     global newAccount
-    accountName = input("\nWhat is the to be Account Holder's name? ").capitalize()
-    accountInitialDeposit = int(input("\nHow much would you like to initally deposit into the account? £"))
-    accountHolder = BankAccount(accountName, accountInitialDeposit)
-    accounts.append(accountHolder)
+    accountType = int(input("What type of account would you like to open?\n(1) Regular Bank Account\n(2) Interest Rewards Account\n(3) Savings Account:\nEnter option number here:"))
+    match accountType:
+        case 1:
+            accountName = input("\nWhat is the to be Account Holder's name? ").capitalize()
+            for names in accounts:
+                if (names.name) == accountName:
+                    print("Account name already exists. Please try again...")
+                    createAccount()
+            accountInitialDeposit = int(input("\nHow much would you like to initally deposit into the account? £"))
+            accountHolder = BankAccount(accountName, accountInitialDeposit)
+            accounts.append(accountHolder)
+        case 2:
+            accountName = input("\nWhat is the to be Account Holder's name? ").capitalize()
+            for names in accounts:
+                if (names.name) == accountName:
+                    print("Account name already exists. Please try again...")
+                    createAccount()
+            accountInitialDeposit = int(input("\nHow much would you like to initally deposit into the account? £"))
+            accountHolder = InterestAccount(accountName, accountInitialDeposit)
+            accounts.append(accountHolder)
+        case 3:
+            accountName = input("\nWhat is the to be Account Holder's name? ").capitalize()
+            for names in accounts:
+                if (names.name) == accountName:
+                    print("Account name already exists. Please try again...")
+                    createAccount()
+            accountInitialDeposit = int(input("\nHow much would you like to initally deposit into the account? £"))
+            accountHolder = SavingsAccount(accountName, accountInitialDeposit)
+            accounts.append(accountHolder)
     with open(FILENAME, "a") as file:
         file.writelines(f"{accountName},{accountInitialDeposit}\n")
     main()
